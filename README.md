@@ -1,54 +1,64 @@
-# React + TypeScript + Vite
+Video Captioner
+A simple React + Vite + TailwindCSS app that lets users:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Load any video via URL (HTML5 videos or YouTube embeds)
 
-Currently, two official plugins are available:
+Add timed captions through a form (start/end timestamps + text)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Display captions both in-page and in native fullscreen
 
-## Expanding the ESLint configuration
+Clean, modern UI with configurable glassmorphic styles
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+🔧 Tech Stack
+Vite for fast dev builds
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+React (19+) as the UI framework
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+TypeScript for type safety
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+TailwindCSS for utility-first styling
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+ReactPlayer (for YouTube/Vimeo/HTML5 uniform playback)
+
+🚀 Getting Started
+Clone this repo:
+
+git clone https://github.com/your-username/video-captioner.git
+cd video-captioner
+
+Install dependencies:
+npm install
+
+# or
+
+yarn
+
+Run in development mode:
+npm run dev
+
+# or
+
+yarn dev
+Build for production:
+
+npm run build
+
+Preview the production build locally:
+npm run preview
+
+🗂️ Project Structure
+
+📦 public # Static HTML entrypoint
+└── index.html
+📦 src
+┣ 📂 components # Reusable React components
+┃ ┣ ┣ CaptionForm.tsx
+┃ ┃┃ VideoInput.tsx  
+ ┃ ┃┃ VideoPlayer.tsx  
+ ┃ ┃┗ ErrorBoundary.tsx
+┃┗ (others...)
+┣ 📜 App.tsx # Main layout and state
+┗ 📜 index.tsx # ReactDOM render
+├── tailwind.config.js
+├── tsconfig.json
+└── package.json
