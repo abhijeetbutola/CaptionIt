@@ -1,24 +1,19 @@
 import React, { useState } from "react";
-import type { FormEvent } from "react";
 import type { Cue } from "../App";
+import type { FormEvent } from "react";
 
-interface CaptionFormProps {
+interface Props {
   onAdd: (cue: Cue) => void;
 }
-
-const CaptionForm: React.FC<CaptionFormProps> = ({ onAdd }) => {
-  const [start, setStart] = useState<string>("");
-  const [end, setEnd] = useState<string>("");
-  const [text, setText] = useState<string>("");
-
+const CaptionForm: React.FC<Props> = ({ onAdd }) => {
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
+  const [text, setText] = useState("");
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const s = parseFloat(start);
     const eT = parseFloat(end);
-    if (isNaN(s) || isNaN(eT) || s >= eT) {
-      alert("Please enter valid start and end times (start < end).");
-      return;
-    }
+    if (isNaN(s) || isNaN(eT) || s >= eT) return;
     onAdd({ start: s, end: eT, text });
     setStart("");
     setEnd("");
@@ -27,45 +22,40 @@ const CaptionForm: React.FC<CaptionFormProps> = ({ onAdd }) => {
 
   return (
     <form
-      className="w-full max-w-md mb-4 p-4 bg-white rounded shadow"
       onSubmit={handleSubmit}
+      className="p-4 bg-[rgba(255,255,255,0.2)] backdrop-blur-md border border-white/20 rounded-lg"
     >
-      <h2 className="text-lg font-semibold mb-2">Add Caption</h2>
-      <div className="flex space-x-2 mb-2">
+      <h2 className="text-lg font-semibold text-white mb-4">Add Caption</h2>
+      <div className="flex space-x-2 mb-4">
         <input
-          type="number"
-          step="0.1"
-          className="flex-1 p-2 border rounded"
           placeholder="Start (s)"
           value={start}
           onChange={(e) => setStart(e.target.value)}
           required
+          className="flex-1 p-2 bg-white/20 text-white rounded-lg border border-white/30 focus:outline-none"
         />
         <input
-          type="number"
-          step="0.1"
-          className="flex-1 p-2 border rounded"
           placeholder="End (s)"
           value={end}
           onChange={(e) => setEnd(e.target.value)}
           required
+          className="flex-1 p-2 bg-white/20 text-white rounded-lg border border-white/30 focus:outline-none"
         />
       </div>
       <textarea
-        className="w-full p-2 border rounded mb-2"
         placeholder="Caption text"
         value={text}
         onChange={(e) => setText(e.target.value)}
         required
+        className="w-full p-2 bg-white/20 text-white rounded-lg border border-white/30 focus:outline-none mb-4"
       />
       <button
-        className="px-4 py-2 bg-green-600 text-white rounded"
         type="submit"
+        className="px-4 py-2 bg-white/30 text-white rounded-lg hover:bg-white/40"
       >
         Add
       </button>
     </form>
   );
 };
-
 export default CaptionForm;
